@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block crispy_field %}
+    <div class="form-group {% if field.field.widget.input_type == 'checkbox' %}form-check{% endif %} {% if field.errors %}has-danger{% endif %}">
+        {% if field.label %}
+            {% if field.field.required %}{{ field.label|safe }} <span class="text-danger">*</span>{% else %}{{ field.label|safe }}{% endif %}
+        {% endif %}
+        {{ field|crispy }}
+        {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+        {% if field.errors %}
+            <div class="invalid-feedback">
+                {% for error in field.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock crispy_field %}
+
+{% block content %}
+<!-- Your template code here -->
+{% endblock %}
